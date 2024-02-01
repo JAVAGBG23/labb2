@@ -5,6 +5,10 @@ import com.labb2.recipes_api.models.Comment;
 import com.labb2.recipes_api.models.Recipe;
 import com.labb2.recipes_api.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,6 +62,21 @@ public class RecipeService {
                .orElseThrow(() -> new EntityNotFoundException("Recipe with id: " + id + " was not found!"));
    }
 
+   // delete
+    public void deleteRecipe(String id) {
+       recipeRepository.deleteById(id);
+    }
+
+    // filtrera på taggar
+    public List<Recipe> findRecipesByTags(List<String> tags) {
+       return recipeRepository.findByTagsIn(tags);
+    }
+
+    // pagination & sortering
+    public Page<Recipe> getRecipeWithPaginationAndSorting(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return recipeRepository.findAll(pageable);
+    }
 
 
 

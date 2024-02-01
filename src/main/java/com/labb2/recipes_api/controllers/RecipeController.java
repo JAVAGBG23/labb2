@@ -1,10 +1,12 @@
 package com.labb2.recipes_api.controllers;
 
+import com.labb2.recipes_api.exception.EntityNotFoundException;
 import com.labb2.recipes_api.models.Comment;
 import com.labb2.recipes_api.models.Recipe;
 import com.labb2.recipes_api.services.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,46 @@ public class RecipeController {
 
         return recipe.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    // PUT
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateRecipe(@PathVariable String id, @Valid @RequestBody Recipe recipeDetails) {
+        try {
+              Recipe updatedRecipe = recipeService.updateRecipe(id, recipeDetails);
+              return ResponseEntity.ok(updatedRecipe);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteRecipe(@PathVariable String id) {
+        recipeService.deleteRecipe(id);
+        return ResponseEntity.ok("Recipe with id: " + id + " has been deleted!");
+    }
+
+    // GET filtrera på taggar
+    @GetMapping("/search")
+    public List<Recipe> findRecipesByTags(@RequestParam List<String> tags) {
+        return recipeService.findRecipesByTags(tags);
+    }
+
+
+   // pagination & sorting
+   @GetMapping
+   public Page<Recipe> getRecipeWithPaginationAndSorting(
+           @RequestParam(defaultValue = "0") int page,
+           @RequestParam(defaultValue = "10") int size,
+           @RequestParam(defaultValue = "id") String sortBy) {
+        return recipeService.getRecipeWithPaginationAndSorting(page, size, sortBy);
+   }
+
+
+
+
+
+
 
 
 
