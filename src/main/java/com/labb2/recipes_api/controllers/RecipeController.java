@@ -123,7 +123,6 @@ public class RecipeController {
            Recipe updatedRecipe = recipeService.addCommentToRecipe(recipeId, comment);
            return ResponseEntity.ok(updatedRecipe);
     }
-
     // POST lägga till kommentar till recept med inbäddat dokument
   /*  @PostMapping("/{recipeId}/comments")
     public ResponseEntity<Recipe> addCommentToRecipe(@PathVariable String recipeId, @RequestBody Comment comment) {

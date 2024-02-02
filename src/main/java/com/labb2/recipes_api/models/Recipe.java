@@ -23,7 +23,7 @@ public class Recipe {
 
     // @NotEmpty = collections, hashmap, arrays etc
     @NotEmpty(message = "Field cannot be blank")
-    private List<String> ingredients;
+    private List<String> ingredients = new ArrayList<>();
 
     private List<String> tags = new ArrayList<>();
 

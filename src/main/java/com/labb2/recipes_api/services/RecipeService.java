@@ -112,6 +112,8 @@ public class RecipeService {
         Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() -> new RuntimeException("Recipe not found"));
         Comment savedComment = commentService.saveComment(comment);
         recipe.getComments().add(savedComment);
+        // recipe.getComments() kallar på arrayListen i Recipe model
+        // sen används add metoden för att lägga den nya kommentaren
         return recipeRepository.save(recipe);
     }
 
