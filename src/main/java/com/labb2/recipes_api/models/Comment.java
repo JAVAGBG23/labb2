@@ -10,6 +10,7 @@ import java.util.Date;
 public class Comment {
     @Id
     private String id;
+    //id behövs ej så här om vi gör inbäddat
 
     private String author = "Helena";
 
@@ -17,6 +18,7 @@ public class Comment {
 
     @CreatedDate
     private Date created_at;
+    //behövs ej så här om vi gör inbäddat
 
     public Comment() {
     }

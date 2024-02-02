@@ -6,7 +6,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface RecipeRepository extends MongoRepository<Recipe, String> {
-    // så att vi kan filtrera på taggar
+    // så att vi kan söka på ett recept baserat på taggar
     List<Recipe> findByTagsIn(List<String> tags);
+
+    // så att vi kan söka på ett recept baserat på ingredienser
+    List<Recipe> findByIngredientsIn(List<String> ingredients);
 
 }

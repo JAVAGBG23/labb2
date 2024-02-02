@@ -27,10 +27,23 @@ public class Recipe {
 
     private List<String> tags = new ArrayList<>();
 
-    // inbäddade kommentarer i dokumentet
+    //alternativ 1: inbäddade kommentarer
+    //om du förväntar dig att varje recept endast kommer att ha ett fåtal
+    // kommentarer, kan det vara enklare att inbädda kommentarerna
+    // direkt i receptdokumenten.
+    // om vi instansierar listan sm en ny arrayList i modellen ser vi till att den aldrig är null
+    // om vi bara har;
+    // private List<Comment> comments
+    // måste du varje gång du använder den först kontrollera om den är null och,
+    // om så är fallet, skapa en ny lista. detta kan göra din kod mer komplex och öka risken för fel.
+
     //private List<Comment> comments = new ArrayList<>();
 
     // referens med ObjectId
+    //alternativ 2: referenser till kommentarer
+    //om du förväntar dig en stor mängd kommentarer, eller om kommentarer
+    // behöver hanteras mer oberoende, kan det vara bättre att
+    // referera till kommentarer via deras id:
     @DBRef
     private List<Comment> comments = new ArrayList<>();
 
