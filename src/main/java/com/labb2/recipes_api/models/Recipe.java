@@ -40,8 +40,8 @@ public class Recipe {
     //private List<Comment> comments = new ArrayList<>();
 
     // referens med ObjectId
-    //alternativ 2: referenser till kommentarer
-    //om du förväntar dig en stor mängd kommentarer, eller om kommentarer
+    // alternativ 2: referenser till kommentarer
+    // om du förväntar dig en stor mängd kommentarer, eller om kommentarer
     // behöver hanteras mer oberoende, kan det vara bättre att
     // referera till kommentarer via deras id:
     @DBRef
@@ -49,7 +49,6 @@ public class Recipe {
 
     public Recipe() {
     }
-
 
     // metod för att lägga till en kommentar
     public void addComment(Comment comment) {
